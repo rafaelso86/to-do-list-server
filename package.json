@@ -8,7 +8,8 @@
     "start": "node app.ts",
     "dev": "nodemon app.ts",
     "vercel-build": "echo vercel",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "build": "express build --output public"
   },
   "author": "",
   "license": "ISC",
