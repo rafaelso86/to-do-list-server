@@ -21,7 +21,7 @@ const {
   warnOnce,
   defineDmmfProperty,
   Public,
-  detectRuntime,
+  getRuntime
 } = require('./runtime/library.js')
 
 
@@ -31,12 +31,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 5.10.2
- * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
+ * Prisma Client JS version: 5.11.0
+ * Query Engine version: efd2449663b3d73d637ea1fd226bafbcf45b3102
  */
 Prisma.prismaVersion = {
-  client: "5.10.2",
-  engine: "5a9203d0590c951969e85a7d07215503f4672eb9"
+  client: "5.11.0",
+  engine: "efd2449663b3d73d637ea1fd226bafbcf45b3102"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -119,6 +119,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -153,18 +158,17 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../..",
-  "clientVersion": "5.10.2",
-  "engineVersion": "5a9203d0590c951969e85a7d07215503f4672eb9",
+  "clientVersion": "5.11.0",
+  "engineVersion": "efd2449663b3d73d637ea1fd226bafbcf45b3102",
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "mysql",
-  "postinstall": false,
-  "ciName": "Vercel",
+  "activeProvider": "postgresql",
+  "postinstall": true,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -173,8 +177,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id      Int      @id @default(autoincrement())\n  email   String   @unique\n  name    String\n  password String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  list List[]\n  tasks Tasks[]\n}\n\nmodel List {\n  id      Int      @id @default(autoincrement())\n  user_id Int\n  user    User @relation(fields: [user_id], references: [id])\n  name    String\n  status  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  tasks Tasks[]\n}\n\nmodel Tasks {\n  id      Int      @id @default(autoincrement())\n  user_id Int\n  user    User @relation(fields: [user_id], references: [id])\n  list_id Int\n  list    List @relation(fields: [list_id], references: [id])\n  name String\n  check Int\n}",
-  "inlineSchemaHash": "8e513b099de0b623ade9e92d825baa4987314f7b117e2db523bc4900384c7efd",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id      Int      @id @default(autoincrement())\n  email   String   @unique\n  name    String\n  password String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  list List[]\n  tasks Tasks[]\n}\n\nmodel List {\n  id      Int      @id @default(autoincrement())\n  user_id Int\n  user    User @relation(fields: [user_id], references: [id])\n  name    String\n  status  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  tasks Tasks[]\n}\n\nmodel Tasks {\n  id      Int      @id @default(autoincrement())\n  user_id Int\n  user    User @relation(fields: [user_id], references: [id])\n  list_id Int\n  list    List @relation(fields: [list_id], references: [id])\n  name String\n  check Int\n}",
+  "inlineSchemaHash": "aa87726443b11b6d084ad5c871a0e150f040d9050d44138d2f22434d4513b582",
   "copyEngine": true
 }
 
