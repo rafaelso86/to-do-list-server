@@ -1,10 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
+//import { PrismaClient } from '@prisma/client'
+//const prisma = new PrismaClient();
+
+const prisma = require('@prisma/client');
 
 const listController = {
     // Create
-    create: async(req: Request, res: Response, next: NextFunction) => {
+    create: async(req, res, next) => {
         try {
             const {user_id, name, status} = req.body;
 
@@ -18,7 +19,7 @@ const listController = {
     },
 
     // Read
-    getAll: async (req: Request, res: Response, next: NextFunction) => {
+    getAll: async (req, res, next) => {
         try {
             const { user_id } = req.params;
             const lists = await prisma.list.findMany({
@@ -32,7 +33,7 @@ const listController = {
         }
     },
 
-    statusUpdate: async(req: Request, res: Response, next: NextFunction) => {
+    statusUpdate: async(req, res, next) => {
         try{
             const { user_id, list_id, status } = req.body;
             const lists = await prisma.list.update({
@@ -47,7 +48,7 @@ const listController = {
     },
 
     // Delete
-    delete: async (req: Request, res: Response, next: NextFunction) => {
+    delete: async (req, res, next) => {
         try{
             const {user_id, id} = req.body;      
             

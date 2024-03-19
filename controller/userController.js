@@ -1,19 +1,15 @@
-import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
+//vimport { PrismaClient } from '@prisma/client'
+// const prisma = new PrismaClient();
+
+const prisma = require('@prisma/client');
 
 // JWT
 const jwt = require('jsonwebtoken');
-import JwtSecret from '../middleware/secretKey';
-
-interface IAuth{
-    loggedUser?: any,
-    body?: any,
-}
+const JwtSecret = require('../middleware/secretKey');
 
 const userController = {
     // Create
-    create: async(req: Request, res: Response, next: NextFunction) => {
+    create: async(req, res, next) => {
         try {
             const {name, email, password} = req.body;
 
@@ -36,7 +32,7 @@ const userController = {
         }
     },
 
-    getAll: async(req: Request, res: Response, next: NextFunction) => {
+    getAll: async(req, res, next) => {
         try {
             const allUsers = await prisma.user.findMany();
             const arr = ({users: allUsers});
@@ -46,7 +42,7 @@ const userController = {
         }
     },
 
-    getOne: async(req: IAuth, res: Response, next: NextFunction) => {
+    getOne: async(req, res, next) => {
         try{
             const {email, password} = req.body;
 
@@ -58,7 +54,7 @@ const userController = {
                 res.status(200).json({message: 'Usuário não encontrado', status: false});
             }
             else{
-                jwt.sign({id: user.id, email: user.email}, JwtSecret, {expiresIn: '24h'}, (err: any, token: string) => {
+                jwt.sign({id: user.id, email: user.email}, JwtSecret, {expiresIn: '24h'}, (err, token) => {
                     if(err){
                         res.status(400).json({message: 'Falha na autenticação', status: false});
                     }

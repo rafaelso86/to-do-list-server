@@ -1,10 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient();
+// import { PrismaClient } from '@prisma/client'
+// const prisma = new PrismaClient();
+
+const prisma = require('@prisma/client');
 
 const tasksController = {
     // Create
-    create: async (req: Request, res: Response, next: NextFunction) => {
+    create: async (req, res, next) => {
         try {
             const { user_id, list_id, name, check } = req.body;
             await prisma.tasks.create({
@@ -17,7 +18,7 @@ const tasksController = {
     },
 
     // Read
-    getAll: async (req: Request, res: Response, next: NextFunction) => {
+    getAll: async (req, res, next) => {
         try {
             const {user_id, list_id} = req.params;
             const tasks = await prisma.tasks.findMany({
@@ -36,7 +37,7 @@ const tasksController = {
         }
     },
 
-    checkUpdate: async(req: Request, res: Response, next: NextFunction) => {
+    checkUpdate: async(req, res, next) => {
         try{
             const {user_id, id, check} = req.body;
             await prisma.tasks.update({

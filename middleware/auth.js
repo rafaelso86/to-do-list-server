@@ -1,19 +1,12 @@
-import {Request, Response, NextFunction} from 'express';
 const jwt = require('jsonwebtoken');
-import JwtSecret from './secretKey';
+const JwtSecret = require('./secretKey.js');
 
-interface IAuth{
-    token?: any
-    loggedUser?: any
-    headers?: any
-}
-
-function auth(req: Request, res: Response, next: NextFunction){
+function auth(req, res, next){
     const authToken = req.headers['authorization'];
     if(authToken !== undefined){
         const bearer = authToken.split(' ');
-        const token: any = bearer[1];
-        jwt.verify(token, JwtSecret, (err: any, data: any) => {
+        const token = bearer[1];
+        jwt.verify(token, JwtSecret, (err, data) => {
             if(err){
                 res.status(401).json({message: 'Token inválido.'})        
             }
@@ -30,4 +23,4 @@ function auth(req: Request, res: Response, next: NextFunction){
     next();
 }
 
-export default auth;
+module.exports = auth;
