@@ -1,13 +1,21 @@
-const express = require('express');
-const auth = require('./middleware/auth.js');
+// const express = require('express');
+// const auth = require('./middleware/auth.js');
+
+import express from 'express';
+import auth from './middleware/auth.js';
+import cors from 'cors';
 const app = express();
-const cors = require('cors')
+// const cors = require('cors')
 const port = 3333;
 
 // Controller
-const userController = require('./controller/userController');
-const listController = require('./controller/listController');
-const tasksController = require('./controller/tasksController');
+// const userController = require('./controller/userController');
+// const listController = require('./controller/listController');
+// const tasksController = require('./controller/tasksController');
+
+import userController from './controller/userController.js';
+import listController from './controller/listController.js';
+import tasksController from './controller/tasksController.js';
 
 app.use(cors());
 app.use(express.json());

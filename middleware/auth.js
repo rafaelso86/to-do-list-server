@@ -1,5 +1,8 @@
-const jwt = require('jsonwebtoken');
-const JwtSecret = require('./secretKey.js');
+// const jwt = require('jsonwebtoken');
+// const JwtSecret = require('./secretKey.js');
+
+import jwt from 'jsonwebtoken';
+import JwtSecret from './secretKey.js';
 
 function auth(req, res, next){
     const authToken = req.headers['authorization'];
@@ -23,4 +26,5 @@ function auth(req, res, next){
     next();
 }
 
-module.exports = auth;
+export default auth;
+//module.exports = auth;

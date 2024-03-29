@@ -1,7 +1,7 @@
-//import { PrismaClient } from '@prisma/client'
-//const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient();
 
-const prisma = require('@prisma/client');
+// const prisma = require('@prisma/client');
 
 const listController = {
     // Create
@@ -72,4 +72,5 @@ const listController = {
     }
 };
 
-module.exports = listController;
+// module.exports = listController;
+export default listController

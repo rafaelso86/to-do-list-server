@@ -1,11 +1,14 @@
-//vimport { PrismaClient } from '@prisma/client'
-// const prisma = new PrismaClient();
+import { PrismaClient } from '@prisma/client'
+const prisma = new PrismaClient();
 
-const prisma = require('@prisma/client');
+// const prisma = require('@prisma/client');
 
 // JWT
-const jwt = require('jsonwebtoken');
-const JwtSecret = require('../middleware/secretKey');
+// const jwt = require('jsonwebtoken');
+// const JwtSecret = require('../middleware/secretKey');
+import jwt from 'jsonwebtoken';
+import JwtSecret from '../middleware/secretKey.js';
+
 
 const userController = {
     // Create
@@ -69,4 +72,5 @@ const userController = {
     }
 }
 
-module.exports = userController;
+//module.exports = userController;
+export default userController;
