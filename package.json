@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
     "dev": "nodemon app.js",
-    "build": "prisma migrate deploy && prisma generate && npm run generate"
+    "build": "prisma migrate && npm run generate",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
